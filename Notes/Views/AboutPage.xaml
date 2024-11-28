@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:Notes.Models"
-             x:Class="Notes.Views.AboutPage">
-    <!-- Definir el contexto de datos como una instancia del modelo About -->
-    <ContentPage.BindingContext>
-        <models:About />
-    </ContentPage.BindingContext>
-
-    <VerticalStackLayout Spacing="10" Margin="10">
-        <HorizontalStackLayout Spacing="10">
-            <Image Source="dotnet_bot.png"
-                   SemanticProperties.Description="The dot net bot waving hello!"
-                   HeightRequest="64" />
-            <Label FontSize="22" FontAttributes="Bold" 
-                   Text="{Binding Title}" 
-                   VerticalOptions="End" />
-            <Label FontSize="22" 
-                   Text="{Binding Version}" 
-                   VerticalOptions="End" />
-        </HorizontalStackLayout>
-
-        <Label Text="{Binding Message}" />
-        <Button Text="Learn more..." Clicked="LearnMore_Clicked" />
+             x:Class="Notes.Views.AboutPage"
+             Title="About">
+    <VerticalStackLayout Spacing="20" Padding="10" HorizontalOptions="Center">
+        <Image Source="icon_eric.png" HeightRequest="100" WidthRequest="100" />
+        <Label Text="Eric Mullo"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        <Label Text="Soy un próximo ingeniero de Software, me gusta el fútbol."
+               FontSize="18"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center" />
     </VerticalStackLayout>
 </ContentPage>
