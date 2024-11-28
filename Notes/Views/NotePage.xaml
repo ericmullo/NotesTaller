@@ -3,18 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notes.Views.NotePage"
              Title="Note">
-    <VerticalStackLayout Spacing="10" Margin="5">
+    <VerticalStackLayout Spacing="10" Padding="10">
         <Editor x:Name="TextEditor"
                 Placeholder="Enter your note"
-                Text="{Binding Text}"
-                HeightRequest="100" />
+                HeightRequest="200"
+                BackgroundColor="White"
+                TextColor="Black"
+                FontSize="18"
+                VerticalOptions="StartAndExpand" />
 
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
             <Button Text="Save"
+                    BackgroundColor="#6200EE"
+                    TextColor="White"
+                    FontSize="16"
+                    CornerRadius="10"
                     Clicked="SaveButton_Clicked" />
 
             <Button Grid.Column="1"
                     Text="Delete"
+                    BackgroundColor="#6200EE"
+                    TextColor="White"
+                    FontSize="16"
+                    CornerRadius="10"
                     Clicked="DeleteButton_Clicked" />
         </Grid>
     </VerticalStackLayout>

@@ -2,64 +2,67 @@ using System;
 using System.IO;
 using Microsoft.Maui.Controls;
 
-namespace Notes
+namespace Notes.Views
 {
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public partial class NotePage : ContentPage
     {
+        private string _itemId;
+
+        public string ItemId
+        {
+            get => _itemId;
+            set
+            {
+                _itemId = value;
+                LoadNote(GetFilePathFromItemId(_itemId));
+            }
+        }
+
         public NotePage()
         {
             InitializeComponent();
-
-            // Obtener la ruta del directorio de datos de la aplicación
-            string appDataPath = FileSystem.AppDataDirectory;
-
-            // Generar un nombre de archivo aleatorio para la nota
-            string randomFileName = $"{Path.GetRandomFileName()}.notes.txt";
-
-            // Llamar al método LoadNote con la ruta completa
-            LoadNote(Path.Combine(appDataPath, randomFileName));
         }
 
-        // Método para cargar una nota desde un archivo
+        private string GetFilePathFromItemId(string itemId)
+        {
+            string appDataPath = FileSystem.AppDataDirectory;
+            return Path.Combine(appDataPath, $"{itemId}.notes.txt");
+        }
+
         private void LoadNote(string fileName)
         {
-            // Crear un modelo de nota
             Models.Note noteModel = new Models.Note
             {
                 Filename = fileName
             };
 
-            // Verificar si el archivo existe
             if (File.Exists(fileName))
             {
-                noteModel.Date = File.GetCreationTime(fileName);
                 noteModel.Text = File.ReadAllText(fileName);
+                noteModel.Date = File.GetCreationTime(fileName);
             }
 
-            // Asignar el modelo como BindingContext para la página
             BindingContext = noteModel;
         }
 
-        private void SaveButton_Clicked(object sender, EventArgs e)
+        private async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            if (BindingContext is Models.Note noteModel)
+            if (BindingContext is Models.Note note)
             {
-                // Guardar el contenido en el archivo especificado por el modelo
-                File.WriteAllText(noteModel.Filename, noteModel.Text);
+                File.WriteAllText(note.Filename, TextEditor.Text);
             }
+            await Shell.Current.GoToAsync("..");
         }
 
-        private void DeleteButton_Clicked(object sender, EventArgs e)
+        private async void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            if (BindingContext is Models.Note noteModel)
+            if (BindingContext is Models.Note note)
             {
-                // Eliminar el archivo si existe
-                if (File.Exists(noteModel.Filename))
-                    File.Delete(noteModel.Filename);
-
-                // Limpiar el texto en el modelo
-                noteModel.Text = string.Empty;
+                if (File.Exists(note.Filename))
+                    File.Delete(note.Filename);
             }
+            await Shell.Current.GoToAsync("..");
         }
     }
 }
