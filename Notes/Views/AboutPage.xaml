@@ -4,7 +4,7 @@
              x:Class="Notes.Views.AboutPage"
              Title="About">
     <VerticalStackLayout Spacing="20" Padding="10" HorizontalOptions="Center">
-        <Image Source="icon_eric.png" HeightRequest="100" WidthRequest="100" />
+       
         <Label Text="Eric Mullo"
                FontSize="24"
                FontAttributes="Bold"
@@ -13,5 +13,10 @@
                FontSize="18"
                HorizontalOptions="Center"
                HorizontalTextAlignment="Center" />
+       
+        <Image Source="imagen1.jpeg" 
+               HeightRequest="400"
+               Aspect="AspectFit"
+               VerticalOptions="StartAndExpand" />
     </VerticalStackLayout>
 </ContentPage>
