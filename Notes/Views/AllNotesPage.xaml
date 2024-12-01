@@ -2,20 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notes.Views.AllNotesPage"
-             Title="Notes">
+             Title="Notes"
+             BackgroundColor="Blue">
     <VerticalStackLayout Padding="10">
         <CollectionView x:Name="notesCollection"
                         SelectionChanged="notesCollection_SelectionChanged"
                         ItemsSource="{Binding Notes}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="{Binding Text}" FontSize="18" />
+                    <Label Text="{Binding Text}" 
+                           FontSize="18" 
+                           TextColor="White" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
         <Button Text="Add Note"
-                BackgroundColor="#6200EE"
+                BackgroundColor="#03A9F4"
                 TextColor="White"
                 FontSize="16"
                 CornerRadius="10"

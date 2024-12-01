@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notes.Views.NotePage"
-             Title="Note">
+             Title="Note"
+             BackgroundColor="Blue">
     <VerticalStackLayout Spacing="10" Padding="10">
         <Editor x:Name="TextEditor"
                 Placeholder="Enter your note"
@@ -14,7 +15,7 @@
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
             <Button Text="Save"
-                    BackgroundColor="#6200EE"
+                    BackgroundColor="#03A9F4"
                     TextColor="White"
                     FontSize="16"
                     CornerRadius="10"
@@ -22,7 +23,7 @@
 
             <Button Grid.Column="1"
                     Text="Delete"
-                    BackgroundColor="#6200EE"
+                    BackgroundColor="#F44336"
                     TextColor="White"
                     FontSize="16"
                     CornerRadius="10"
