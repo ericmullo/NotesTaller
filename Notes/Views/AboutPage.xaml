@@ -2,24 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notes.Views.AboutPage"
-             Title="About"
-             BackgroundColor="Blue">
-    <VerticalStackLayout Spacing="20" Padding="10" HorizontalOptions="Center">
+             Title="Sobre Mí"
+             BackgroundColor="White">
 
-        <Label Text="Eric Mullo"
+    <VerticalStackLayout Spacing="20" Padding="20" HorizontalOptions="Center">
+        <Label Text="Hola, mi nombre es Eric Mullo"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center"
-               TextColor="White" />
-        <Label Text="Soy un próximo ingeniero de Software, me gusta el fútbol."
+               TextColor="Black" />
+
+        <Label Text="Soy ingeniero de software y me gusta jugar fútbol"
                FontSize="18"
                HorizontalOptions="Center"
-               HorizontalTextAlignment="Center"
-               TextColor="White" />
+               TextColor="DarkGray" />
 
-        <Image Source="imagen1.jpeg" 
-               HeightRequest="400"
-               Aspect="AspectFit"
-               VerticalOptions="StartAndExpand" />
+        <Image Source="imagen1.jpg"
+               HeightRequest="200"
+               WidthRequest="200"
+               HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>
