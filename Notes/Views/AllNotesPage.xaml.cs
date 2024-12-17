@@ -1,34 +1,35 @@
-using Microsoft.Maui.Controls;
+namespace Notes.Views;
 
-namespace Notes.Views
+public partial class AllNotesPage : ContentPage
 {
-    public partial class AllNotesPage : ContentPage
+    public AllNotesPage()
     {
-        public AllNotesPage()
-        {
-            InitializeComponent();
-            BindingContext = new Models.AllNotes();
-        }
+        InitializeComponent();
+        BindingContext = new Models.AllNotes();
+    }
+    protected override void OnAppearing()
+    {
+        ((Models.AllNotes)BindingContext).LoadNotes();
+    }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ((Models.AllNotes)BindingContext).LoadNotes();
-        }
+    private async void Add_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(NotePage));
+    }
 
-        private async void Add_Clicked(object sender, EventArgs e)
+    private async void notesCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.Count != 0)
         {
-            await Shell.Current.GoToAsync(nameof(NotePage));
-        }
+            // Get the note model
+            var note = (Models.Note)e.CurrentSelection[0];
 
-        private async void notesCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.CurrentSelection.Count != 0)
-            {
-                var note = (Models.Note)e.CurrentSelection[0];
-                await Shell.Current.GoToAsync($"{nameof(NotePage)}?{nameof(NotePage.ItemId)}={note.Filename}");
-                notesCollection.SelectedItem = null;
-            }
+            // Should navigate to "NotePage?ItemId=path\on\device\XYZ.notes.txt"
+            await Shell.Current.GoToAsync($"{nameof(NotePage)}?{nameof(NotePage.ItemId)}={note.Filename}");
+
+            // Unselect the UI
+            notesCollection.SelectedItem = null;
         }
     }
 }
+

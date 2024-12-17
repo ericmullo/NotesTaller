@@ -1,8 +1,11 @@
-﻿namespace Notes.Models;
+﻿using System;
 
-internal class Note
+namespace Notes.Models
 {
-    public string Filename { get; set; }
-    public string Text { get; set; }
-    public DateTime Date { get; set; }
+    public class Note
+    {
+        public string Filename { get; set; }
+        public string Text { get; set; }
+        public DateTime Date { get; set; }
+    }
 }

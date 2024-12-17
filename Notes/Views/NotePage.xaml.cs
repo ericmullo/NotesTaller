@@ -1,68 +1,57 @@
-using System;
-using System.IO;
-using Microsoft.Maui.Controls;
+namespace Notes.Views;
 
-namespace Notes.Views
+[QueryProperty(nameof(ItemId), nameof(ItemId))]
+
+public partial class NotePage : ContentPage
 {
-    [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public partial class NotePage : ContentPage
+    public string ItemId
     {
-        private string _itemId;
+        set { LoadNote(value); }
+    }
 
-        public string ItemId
+    public NotePage()
+    {
+        InitializeComponent();
+
+        string appDataPath = FileSystem.AppDataDirectory;
+        string randomFileName = $"{Path.GetRandomFileName()}.notes.txt";
+
+        LoadNote(Path.Combine(appDataPath, randomFileName));
+    }
+
+    private void LoadNote(string fileName)
+    {
+        Models.Note noteModel = new()
         {
-            get => _itemId;
-            set
-            {
-                _itemId = value;
-                LoadNote(GetFilePathFromItemId(_itemId));
-            }
+            Filename = fileName
+        };
+
+        if (File.Exists(fileName))
+        {
+            noteModel.Date = File.GetCreationTime(fileName);
+            noteModel.Text = File.ReadAllText(fileName);
         }
 
-        public NotePage()
+        BindingContext = noteModel;
+    }
+
+    private async void SaveButton_Clicked(object sender, EventArgs e)
+    {
+        if (BindingContext is Models.Note note)
+            File.WriteAllText(note.Filename, TextEditor.Text);
+
+        await Shell.Current.GoToAsync("..");
+    }
+
+    private async void DeleteButton_Clicked(object sender, EventArgs e)
+    {
+        if (BindingContext is Models.Note note)
         {
-            InitializeComponent();
+            // Delete the file.
+            if (File.Exists(note.Filename))
+                File.Delete(note.Filename);
         }
 
-        private string GetFilePathFromItemId(string itemId)
-        {
-            string appDataPath = FileSystem.AppDataDirectory;
-            return Path.Combine(appDataPath, $"{itemId}.notes.txt");
-        }
-
-        private void LoadNote(string fileName)
-        {
-            Models.Note noteModel = new Models.Note
-            {
-                Filename = fileName
-            };
-
-            if (File.Exists(fileName))
-            {
-                noteModel.Text = File.ReadAllText(fileName);
-                noteModel.Date = File.GetCreationTime(fileName);
-            }
-
-            BindingContext = noteModel;
-        }
-
-        private async void SaveButton_Clicked(object sender, EventArgs e)
-        {
-            if (BindingContext is Models.Note note)
-            {
-                File.WriteAllText(note.Filename, TextEditor.Text);
-            }
-            await Shell.Current.GoToAsync("..");
-        }
-
-        private async void DeleteButton_Clicked(object sender, EventArgs e)
-        {
-            if (BindingContext is Models.Note note)
-            {
-                if (File.Exists(note.Filename))
-                    File.Delete(note.Filename);
-            }
-            await Shell.Current.GoToAsync("..");
-        }
+        await Shell.Current.GoToAsync("..");
     }
 }
