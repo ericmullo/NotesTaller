@@ -36,7 +36,7 @@ internal class NotesViewModel : IQueryAttributable
             string noteId = query["deleted"].ToString();
             NoteViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
 
-            // If note exists, delete it
+            
             if (matchedNote != null)
                 AllNotes.Remove(matchedNote);
         }
@@ -45,13 +45,13 @@ internal class NotesViewModel : IQueryAttributable
             string noteId = query["saved"].ToString();
             NoteViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
 
-            // If note is found, update it
+            
             if (matchedNote != null)
             {
                 matchedNote.Reload();
                 AllNotes.Move(AllNotes.IndexOf(matchedNote), 0);
             }
-            // If note isn't found, it's new; add it.
+            
             else
                 AllNotes.Insert(0, new NoteViewModel(Models.Note.Load(noteId)));
         }
