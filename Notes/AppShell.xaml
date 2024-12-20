@@ -5,7 +5,7 @@
        xmlns:views="clr-namespace:Notes.Views"
        FlyoutBehavior="Flyout">
 
-    <FlyoutItem Title="Jordy Aguilar Apuntes" FlyoutDisplayOptions="AsMultipleItems">
+    <FlyoutItem Title="Eric Mullo Apuntes" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
             Title="Pagina de Notas"
             ContentTemplate="{DataTemplate views:AllNotesPage}"
