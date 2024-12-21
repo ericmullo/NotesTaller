@@ -7,11 +7,11 @@
 
     <FlyoutItem Title="Eric Mullo Apuntes" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            Title="Pagina de Notas"
+            Title="Pagina de Notas de Eric Mullo"
             ContentTemplate="{DataTemplate views:AllNotesPage}"
             Icon="icon_notes.png" />
         <ShellContent
-            Title="About Me"
+            Title="Acerca de Eric Mullo"
             ContentTemplate="{DataTemplate views:AboutPage}"
             Icon="icon_about.png" />
     </FlyoutItem>
