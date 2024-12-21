@@ -20,6 +20,7 @@
             <Button Grid.Column="1"
                     Text="Delete"
                     Command="{Binding DeleteCommand}"/>
+            
 
         </Grid>
     </VerticalStackLayout>
